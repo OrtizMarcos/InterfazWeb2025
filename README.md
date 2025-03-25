@@ -5,4 +5,4 @@
 > **👤 Participantes del Grupo**
 > - 💻 **Desarrollador:** Jack Delvalle
 > - 💻 **Desarrollador:** Marcos Ortiz
-> - 💻 **Desarrollador:** ............
+> - 💻 **Desarrollador:** Ana Duarte
