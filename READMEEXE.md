@@ -15,7 +15,7 @@
 
 3. **Ejecuta el contenedor:**
     ```bash
-    docker run -p 5173:5173 -v $(pwd):/app -v /app/node_modules --rm react-app
+    docker run -p 5173:5173 react-app
     ```
 
 ¡Y listo! El servidor de desarrollo de Vite estará corriendo en `http://localhost:5173`.
