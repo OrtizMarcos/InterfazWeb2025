@@ -5,6 +5,7 @@ import './App.css';
 import reactLogo from './assets/react.svg';
 import NavbarComponent from './NavbarComponent'; // Importamos el Navbar
 import viteLogo from '/vite.svg';
+import { Placeholder, Card } from "react-bootstrap";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -39,6 +40,18 @@ function App() {
         <h1>¡Hola, Bootstrap en Vite!</h1>
         <Button variant="primary">Click me</Button>
       </div>
+      <Card style={{ width: "18rem" }} className="m-3">
+      <Card.Body>
+        <Placeholder as={Card.Title} animation="glow">
+          <Placeholder xs={6} />
+        </Placeholder>
+        <Placeholder as={Card.Text} animation="glow">
+          <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{" "}
+          <Placeholder xs={6} /> <Placeholder xs={8} />
+        </Placeholder>
+        <Placeholder.Button variant="primary" xs={6} />
+      </Card.Body>
+    </Card>
     </>
 
   )
