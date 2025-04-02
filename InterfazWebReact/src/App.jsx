@@ -1,9 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importamos Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import './App.css';
+import './styles/App.css';
 import reactLogo from './assets/react.svg';
-import NavbarComponent from './NavbarComponent'; // Importamos el Navbar
+import NavbarComponent from './layouts/NavbarComponent';
 import viteLogo from '/vite.svg';
 import { Spinner, Card } from "react-bootstrap";
 
