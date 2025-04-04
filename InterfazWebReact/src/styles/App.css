@@ -19,7 +19,15 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+/*Contenedor general */
+app-main{
 
+}
+
+/*Seccion del Carrusel*/
+carousel-section{
+
+}
 /* Para la navbar, darle un fondo y hacerla responsiva */
 .navbar {
   background-color: #343a40;
@@ -63,17 +71,6 @@ button {
 
 button:hover {
   background-color: #0056b3;
-}
-
-/* Para el contenido dentro de tarjetas o contenedores, agregar márgenes */
-.card {
-  width: 100%;
-  max-width: 400px;
-  margin: 15px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
 }
 
 /* Hacer la app responsive */

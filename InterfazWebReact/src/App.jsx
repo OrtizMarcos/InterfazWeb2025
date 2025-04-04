@@ -6,15 +6,37 @@ import NavbarComponent from './layouts/NavbarComponent';
 
 function App() {
   return (
-    <>
-        {/* NavbarComponent */}
-        <NavbarComponent />
-        {/* TagLineComponent */}
 
-        {/* CarruselComponent */}
+      <div className="app-main">
+           {/*##############################################
+           #################################################
+                              IMPORTANTE
+           ¡¡No cambiar los nombres de las clases(className)
+           como por ejemplo: container, row, col. Por que
+           se van a perder los estilos de Bootstrap.!!!!!
+           ################################################
+           ################################################*/}
+            {/* Navbar |JACKSPARROW*/}
+            <NavbarComponent />
 
-    </>
+            {/* Container para controlar el ancho del contenido */}
+            <div className="container">
+              {/* Tagline |ANABANANA*/}
+              <div className="row my-4">
+                <div className="col-12">
+                    {/* REEMPLAZAR POR EL COMPONENTE */}
+                </div>
+              </div>
 
+              {/* Carousel |MONKITOS*/}
+              <div className="row mb-5">
+                <div className="col-12">
+                    {/* REEMPLAZAR POR EL COMPONENTE */}
+                </div>
+              </div>
+            </div>
+
+          </div>
   )
 }
 
