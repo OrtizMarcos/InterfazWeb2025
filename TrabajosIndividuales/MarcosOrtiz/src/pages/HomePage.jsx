@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import Navbar from '../components/Navbar/Navbar';
-import Hero from '../components/Hero/Hero';
-import AboutSection from '../components/About/AboutSection';
-import MenuHighlights from '../components/Menu/MenuHighlights';
-import ContactInfo from '../components/Contact/ContactInfo';
-import ContactForm from '../components/Contact/ContactForm';
-import Footer from '../components/Footer/Footer';
+import Navbar from "../components/navbar/Navbar.jsx";
+import AboutSection from '../components/About/AboutSection.jsx';
+import MenuHighlights from '../components/Menu/MenuHighlights.jsx';
+import ContactInfo from '../components/contact/ContactInfo.jsx';
+import ContactForm from '../components/contact/ContactForm.jsx';
+import Hero from '../components/hero/Hero.jsx';
+import Footer from '../components/footer/Footer.jsx';
 import '../styles/HomePage.css';
 
 const HomePage = () => {
