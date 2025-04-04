@@ -8,16 +8,33 @@ import ContactForm from '../components/contact/ContactForm.jsx';
 import Hero from '../components/hero/Hero.jsx';
 import Footer from '../components/footer/Footer.jsx';
 import '../styles/HomePage.css';
+import {useGSAP} from '../hooks/useGSAP.js'
+import PixelTransition from '../components/transitions/PixelTransition'
+import PixelScroll from '../components/Effects/PixelScroll';
 
 const HomePage = () => {
+
+    const { heroRef, aboutRef, menuRef, contactRef } = useGSAP();
+
   return (
     <div className="burger-app">
+
+
+      <PixelScroll/ >
       <Navbar />
+
+      <PixelScroll/ >
       <Hero />
+
+
+      <PixelScroll/ >
       <AboutSection />
+
+      <PixelScroll/ >
       <MenuHighlights />
 
       {/* Sección de Contacto */}
+      <PixelScroll/ >
       <section id="contact" className="py-5">
         <Container>
           <h2 className="text-center mb-4">Contáctanos</h2>

@@ -1,5 +1,33 @@
+// styles/HomePage.css
 .hero-section {
   min-height: 70vh;
   display: flex;
   align-items: center;
+}
+
+.animate-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Estilo para efectos de píxeles */
+@keyframes pixelate {
+  0% {
+    filter: blur(0);
+  }
+  50% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+
+/* Estilo adicional para transiciones más suaves */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
 }

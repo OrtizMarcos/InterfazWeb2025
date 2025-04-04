@@ -1,0 +1,3 @@
+.pixel-transition {
+  will-change: transform, opacity, filter;
+}
