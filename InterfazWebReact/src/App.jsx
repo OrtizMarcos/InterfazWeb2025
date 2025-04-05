@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 import './styles/App.css';
 import NavbarComponent from './layouts/NavbarComponent';
 import CarouselComponent from './components/CarouselComponent';
+import MainComponent from './components/MainComponent';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <div className="row my-4">
                 <div className="col-12">
                     {/* REEMPLAZAR POR EL COMPONENTE */}
+                    <MainComponent />
                 </div>
               </div>
 
