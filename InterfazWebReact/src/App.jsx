@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import './styles/App.css';
 import NavbarComponent from './layouts/NavbarComponent';
+import CarouselComponent from './components/CarouselComponent';
 
 function App() {
   return (
@@ -28,12 +29,13 @@ function App() {
                 </div>
               </div>
 
-              {/* Carousel |MONKITOS*/}
-              <div className="row mb-5">
+              {/* Carousel |MONKITOS */}
+              <div className="row mb-5 carousel-section">
                 <div className="col-12">
-                    {/* REEMPLAZAR POR EL COMPONENTE */}
+                  <CarouselComponent />
                 </div>
               </div>
+
             </div>
 
           </div>
