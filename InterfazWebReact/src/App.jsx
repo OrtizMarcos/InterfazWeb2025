@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importamos Bootstrap
 import './App.css';
-import NavbarComponent from './NavbarComponent'; // Importamos el Navbar
+import NavbarComponent from './layouts/NavbarComponent'; // Importamos el Navbar
 
 function App() {
   return (
