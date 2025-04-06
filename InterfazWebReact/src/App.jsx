@@ -29,13 +29,10 @@ function App() {
                 </div>
               </div>
 
-              {/* Carousel |MONKITOS */}
-              <div className="row mb-5 carousel-section">
-                <div className="col-12">
-                  <CarouselComponent />
-                </div>
-              </div>
-
+              {/* Carousel | MONKITOS */}
+                    <div className="carousel-full-width">
+                      <CarouselComponent />
+                    </div>
             </div>
 
           </div>
