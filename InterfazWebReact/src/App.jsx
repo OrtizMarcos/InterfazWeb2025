@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importamos Bootstrap
-import './App.css';
-import NavbarComponent from './layouts/NavbarComponent'; // Importamos el Navbar
+import './styles/App.css';
+import NavbarComponent from './layouts/NavbarComponent';
+import CarouselComponent from './components/CarouselComponent';
 
 function App() {
   return (
