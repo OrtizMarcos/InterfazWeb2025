@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importamos Bootstrap
 import './App.css';
-import NavbarComponent from './layouts/NavbarComponent.jsx'; // Importamos el Navbar
+import NavbarComponent from './layouts/NavbarComponent'; // Importamos el Navbar
 
 function App() {
   return (
@@ -26,13 +26,10 @@ function App() {
                 </div>
               </div>
 
-              {/* Carousel |MONKITOS */}
-              <div className="row mb-5 carousel-section">
-                <div className="col-12">
-                  <CarouselComponent />
-                </div>
-              </div>
-
+              {/* Carousel | MONKITOS */}
+                    <div className="carousel-full-width">
+                      <CarouselComponent />
+                    </div>
             </div>
 
           </div>
