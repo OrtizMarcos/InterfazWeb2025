@@ -1,8 +1,21 @@
 .custom-navbar {
     background-color: #0d1b2a; /* Azul oscuro */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding: 0.5rem 0;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    position: relative;
+    left: 0;
+    right: 0;
+  }
+
+  .navbar-content {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
   }
 
   .navbar-brand-text {
@@ -15,10 +28,14 @@
     color: #adb5bd;
   }
 
+  .nav-links {
+    margin-left: auto;
+  }
+
   .nav-links .nav-link {
     color: white !important;
     font-size: 1.05rem;
-    margin-left: 1rem;
+    margin-left: 1.5rem;
     transition: color 0.3s;
   }
 
@@ -28,4 +45,15 @@
 
   .navbar-toggle {
     border-color: white;
+    margin-right: 1rem;
+  }
+
+  /* Asegurar que el navbar ocupe todo el ancho */
+  .navbar {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
