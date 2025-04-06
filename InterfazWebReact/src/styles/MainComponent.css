@@ -1,4 +1,17 @@
 /* ESTILOS ESPECÍFICOS PARA MAIN COMPONENT */
+.main-component {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  overflow: hidden;
+  margin-top: -80px;
+  padding-top: 80px;
+}
+
 .main-component .modern-hero {
   position: relative;
   width: 100%;
@@ -46,7 +59,8 @@
 .main-component .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
 }
