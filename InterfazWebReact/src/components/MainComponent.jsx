@@ -4,7 +4,7 @@ import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import '../styles/MainComponent.css';
 
 /**
- * Componente principal que muestra la sección hero y los productos destacados
+ * Componente principal que muestra la descripción de la empresa y los productos destacados
  * Incluye funcionalidades de carrito y favoritos
  */
 const MainComponent = () => {
@@ -23,10 +23,10 @@ const MainComponent = () => {
   const productosDestacados = [
     {
       id: 1,
-      nombre: "Heladera JAM No Frost 500L",
+      nombre: "Heladera JAM 500L",
       precio: "4.500.000 Gs",
       imagen: "/src/assets/heladera-jam.jpg",
-      descripcion: "Heladera No Frost con tecnología de enfriamiento inteligente y eficiencia energética A+"
+      descripcion: "Heladera No Frost con tecnología de enfriamiento inteligente"
     },
     {
       id: 2,
@@ -77,7 +77,7 @@ const MainComponent = () => {
   return (
     // Sección principal del componente
     <section className="main-component">
-      {/* Sección hero con título y descripción */}
+      {/* Sección con título y descripción */}
       <div className="modern-hero">
         <div className="wave-effect"></div>
         <Container className="hero-content">
