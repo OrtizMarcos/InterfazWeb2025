@@ -31,13 +31,17 @@
     git clone https://github.com/OrtizMarcos/InterfazWeb2025.git
     cd InterfazWebReact
     ```
+2. Instala/Actualiza las dependencias:
+   ```bash
+   npm install
+   ```
 
-2. **Construye la imagen de Docker:**
+3. **Construye la imagen de Docker:**
     ```bash
     docker build -t react-app .
     ```
 
-3. **Ejecuta el contenedor:**
+4. **Ejecuta el contenedor:**
     ```bash
     docker run -p 5173:5173 react-app
     ```
