@@ -6,7 +6,6 @@ import MainComponent from './components/MainComponent';
 
 function App() {
   return (
-
       <div className="app-main">
            {/*##############################################
            #################################################
@@ -18,24 +17,17 @@ function App() {
            ################################################*/}
             {/* Navbar |JACKSPARROW*/}
             <NavbarComponent />
-
-            {/* Container para controlar el ancho del contenido */}
-            <div className="container">
-              {/* Tagline |ANABANANA*/}
-              <div className="row my-4">
-                <div className="col-12">
-                    {/* REEMPLAZAR POR EL COMPONENTE */}
+            <div className="main-content">
+                 {/* Tagline |ANABANANA*/}
+                 <div className="col-12">
                     <MainComponent />
-                </div>
-              </div>
-
-              {/* Carousel | MONKITOS */}
-                    <div className="carousel-full-width">
+                 </div>
+                  {/* Carousel | MONKITOS */}
+                  <div className="carousel-full-width">
                       <CarouselComponent />
-                    </div>
+                  </div>
             </div>
-
-          </div>
+      </div>
   )
 }
 

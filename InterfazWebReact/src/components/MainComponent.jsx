@@ -119,58 +119,6 @@ const MainComponent = () => {
           </Row>
         </Container>
       </div>
-
-      {/* Sección de productos destacados */}
-      <div className="productos-destacados">
-        <h2 className="productos-titulo">Productos Destacados JAM</h2>
-        <div className="productos-grid">
-          {/* Mapeo de productos destacados */}
-          {productosDestacados.map((producto, index) => (
-            <div 
-              key={producto.id} 
-              className={`producto-card ${currentProductIndex === index ? 'active' : ''}`}
-              onClick={() => handleProductClick(producto.id)}
-            >
-              {/* Imagen del producto */}
-              <div className="producto-imagen">
-                <img src={producto.imagen} alt={producto.nombre} />
-              </div>
-              {/* Información del producto */}
-              <div className="producto-info">
-                <h3 className="producto-nombre">{producto.nombre}</h3>
-                <p className="producto-descripcion">{producto.descripcion}</p>
-                <p className="producto-precio">{producto.precio}</p>
-                {/* Botones de acción del producto */}
-                <div className="producto-buttons">
-                  <button className="producto-btn">Ver Detalles</button>
-                  <div className="producto-actions">
-                    {/* Botón de favoritos */}
-                    <button 
-                      className={`producto-btn-favorite ${favorites.some(item => item.id === producto.id) ? 'active' : ''}`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleToggleFavorite(producto);
-                      }}
-                    >
-                      <FaHeart />
-                    </button>
-                    {/* Botón de carrito */}
-                    <button 
-                      className="producto-btn-cart"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleAddToCart(producto);
-                      }}
-                    >
-                      <FaShoppingCart />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 };
