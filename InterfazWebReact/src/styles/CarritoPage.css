@@ -1,0 +1,60 @@
+.carrito-container {
+  padding: 2rem 0;
+}
+
+.producto-imagen {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.btn-outline-secondary {
+  border-color: #dee2e6;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f8f9fa;
+}
+
+.card {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.btn-primary {
+  background-color: #0d1b2a;
+  border-color: #0d1b2a;
+}
+
+.btn-primary:hover {
+  background-color: #1a2b3c;
+  border-color: #1a2b3c;
+}
+
+@media (max-width: 768px) {
+  .carrito-container {
+    padding: 1rem;
+  }
+  
+  .table {
+    font-size: 0.9rem;
+  }
+  
+  .producto-imagen {
+    width: 40px;
+    height: 40px;
+  }
+} 

@@ -5,7 +5,7 @@ import { FaShoppingCart, FaSearch } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import '../styles/Navbar.css';
 
-const NavbarComponent = () => {
+const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { getCartCount } = useCart();
@@ -55,4 +55,4 @@ const NavbarComponent = () => {
   );
 };
 
-export default NavbarComponent;
+export default Navbar; 
