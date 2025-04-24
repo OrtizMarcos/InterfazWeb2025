@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .jam-text { fill: #1a237e; }
+    .crown { fill: #1a237e; }
+    .tech-text { fill: #1a237e; font-style: italic; }
+  </style>
+  <g transform="translate(10,30)">
+    <text x="20" y="50" class="jam-text" font-family="Arial Black" font-size="60">JAM</text>
+    <path class="crown" d="M200,10 L220,40 L180,40 Z"/>
+    <text x="20" y="90" class="tech-text" font-family="Arial" font-size="24">más tecnología</text>
+  </g>
+</svg> 
