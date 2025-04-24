@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaShoppingCart, FaInfoCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import '../styles/MainComponent.css';
 
 /**
@@ -7,6 +8,12 @@ import '../styles/MainComponent.css';
  * Incluye funcionalidades de carrito y favoritos
  */
 const MainComponent = () => {
+  const navigate = useNavigate();
+
+  const handleComprarAhora = () => {
+    navigate('/productos');
+  };
+
   return (
     <div className="main-hero">
       <div className="hero-content">
@@ -18,7 +25,7 @@ const MainComponent = () => {
           Tecnología de vanguardia, eficiencia energética y diseño moderno para tu hogar.
         </p>
         <div className="cta-buttons">
-          <button className="cta-button primary">
+          <button className="cta-button primary" onClick={handleComprarAhora}>
             <FaShoppingCart /> Comprar Ahora
           </button>
           <button className="cta-button secondary">
