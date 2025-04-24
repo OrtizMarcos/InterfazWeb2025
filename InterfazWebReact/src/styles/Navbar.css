@@ -172,20 +172,26 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
 
-  .cart-link {
+  .cart-link, .favorites-link {
     position: relative;
-    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    color: white !important;
+    transition: color 0.3s ease;
   }
 
-  .cart-count {
+  .cart-link:hover, .favorites-link:hover {
+    color: #ff4d4d !important;
+  }
+
+  .cart-count, .favorites-count {
     position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: #dc3545;
+    top: -8px;
+    right: -8px;
+    background-color: #ff4d4d;
     color: white;
     border-radius: 50%;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
     min-width: 20px;
     text-align: center;
   }
@@ -199,7 +205,7 @@
       margin-bottom: 1rem;
     }
     
-    .cart-link {
+    .cart-link, .favorites-link {
       margin-top: 1rem;
     }
   }
