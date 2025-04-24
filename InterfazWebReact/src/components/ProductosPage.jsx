@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Pagination } from 'react-bootstrap';
 import { FaShoppingCart, FaHeart, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useCart } from '../context/CartContext';
 import '../styles/ProductosPage.css';
 import { productImages } from '../assets/productImages';
 
@@ -105,63 +104,27 @@ const ProductosPage = () => {
   const currentProducts = productos.slice(indexOfFirstProduct, indexOfLastProduct);
   const totalPages = Math.ceil(productos.length / productsPerPage);
 
-  const handleAddToCart = (producto) => {
-    const isInCart = _cartItems.some(item => item.id === producto.id);
-    
-    if (isInCart) {
-      toast.info(`${producto.nombre} ya está en tu carrito`, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark"
-      });
+  const handleAddToCart = (product) => {
+    const existingItem = _cartItems.find(item => item.id === product.id);
+    if (existingItem) {
+      setCartItems(prevItems => prevItems.map(item =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ));
     } else {
-      setCartItems(prevItems => [...prevItems, producto]);
-      toast.success(`${producto.nombre} agregado al carrito`, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark"
-      });
+      setCartItems(prevItems => [...prevItems, { ...product, quantity: 1 }]);
     }
   };
 
-  const handleToggleFavorite = (producto) => {
-    const isFavorite = favorites.some(item => item.id === producto.id);
-    
-    if (isFavorite) {
-      setFavorites(prevFavorites => prevFavorites.filter(item => item.id !== producto.id));
-      toast.info(`${producto.nombre} eliminado de favoritos`, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark"
-      });
-    } else {
-      setFavorites(prevFavorites => [...prevFavorites, producto]);
-      toast.success(`${producto.nombre} agregado a favoritos`, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark"
-      });
-    }
+  const handleToggleFavorite = (productId) => {
+    setFavorites(prev => {
+      if (prev.includes(productId)) {
+        return prev.filter(id => id !== productId);
+      } else {
+        return [...prev, productId];
+      }
+    });
   };
 
   const handlePageChange = (pageNumber) => {
@@ -196,8 +159,8 @@ const ProductosPage = () => {
                       <FaShoppingCart /> Comprar
                     </button>
                     <button 
-                      className={`producto-btn-favorite ${favorites.some(item => item.id === producto.id) ? 'active' : ''}`}
-                      onClick={() => handleToggleFavorite(producto)}
+                      className={`producto-btn-favorite ${favorites.some(item => item === producto.id) ? 'active' : ''}`}
+                      onClick={() => handleToggleFavorite(producto.id)}
                     >
                       <FaHeart />
                     </button>
@@ -237,18 +200,6 @@ const ProductosPage = () => {
           </Pagination>
         </div>
       </Container>
-      <ToastContainer 
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 };
