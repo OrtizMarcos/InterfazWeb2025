@@ -19,17 +19,7 @@ const EmpresaPage = () => {
       </div>
       
       <Container fluid className="empresa-container">
-        <Row className="empresa-grid">
-          <Col xs={12} className="empresa-info">
-            <div className="empresa-card">
-              <h2>Historia</h2>
-              <p>
-                ElectroHogar JAM ha sido líder en la distribución de electrodomésticos de alta calidad en Paraguay. 
-                Nuestra misión es llevar la innovación y la tecnología a cada hogar, ofreciendo productos que mejoran la calidad de vida.
-              </p>
-            </div>
-          </Col>
-          
+        <Row className="empresa-grid">          
           <Col xs={12} className="empresa-info">
             <div className="empresa-card">
               <h2>Fundadores</h2>
