@@ -147,7 +147,7 @@ const FavoritosPage = () => {
                         className="btn-add-cart"
                         onClick={() => handleAddToCart(producto)}
                       >
-                        <FaShoppingCart /> Agregar al carrito
+                        <FaShoppingCart /> Comprar
                       </button>
                       <button 
                         className="btn-remove"

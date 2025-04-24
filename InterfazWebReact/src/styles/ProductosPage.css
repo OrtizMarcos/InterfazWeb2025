@@ -32,8 +32,8 @@
 }
 
 .productos-header {
-  padding: 4rem 0;
-  margin-bottom: 2rem;
+  padding: 2rem 0;
+  margin-bottom: 1rem;
   width: 100%;
   text-align: center;
   position: relative;
@@ -43,7 +43,7 @@
 .productos-header h1 {
   font-size: 3rem;
   font-weight: 800;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   position: relative;
   z-index: 2;
   text-transform: uppercase;
@@ -58,7 +58,7 @@
 .productos-header p {
   font-size: 1.3rem;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0 auto 1.5rem auto;
   position: relative;
   z-index: 2;
   color: rgba(255, 255, 255, 0.9);
@@ -328,16 +328,18 @@
 
 @media (max-width: 768px) {
   .productos-header {
-    padding: 2rem 0;
+    padding: 1.5rem 0;
   }
 
   .productos-header h1 {
     font-size: 2rem;
+    margin-bottom: 0.5rem;
   }
 
   .productos-header p {
     font-size: 1rem;
     padding: 0 1rem;
+    margin-bottom: 1rem;
   }
 
   .productos-container {
@@ -359,23 +361,33 @@
   .producto-precio {
     font-size: 1rem;
   }
+
+  .search-container {
+    margin: 0 auto 1.5rem auto;
+  }
 }
 
 @media (max-width: 480px) {
   .productos-header {
-    padding: 1.5rem 0;
+    padding: 1rem 0;
   }
 
   .productos-header h1 {
     font-size: 1.8rem;
+    margin-bottom: 0.5rem;
   }
 
   .productos-header p {
     font-size: 0.9rem;
+    margin-bottom: 1rem;
   }
 
   .producto-imagen {
     height: 180px;
+  }
+
+  .search-container {
+    margin: 0 auto 1rem auto;
   }
 }
 
@@ -416,4 +428,51 @@
 .pagination .page-item.disabled .page-link {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  position: relative;
+  z-index: 2;
+  padding: 0 1rem;
+}
+
+.search-input {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #1a1a1a !important;
+  font-size: 1.1rem !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0 10px 10px 0 !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.search-input:focus {
+  box-shadow: 0 6px 12px rgba(0, 255, 136, 0.15) !important;
+  border-color: rgba(0, 255, 136, 0.3) !important;
+  outline: none !important;
+}
+
+.input-group-text {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-right: none !important;
+  color: #00cc6a !important;
+  border-radius: 10px 0 0 10px !important;
+  padding: 0.75rem 1rem !important;
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  margin: 2rem auto;
+  max-width: 600px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 } 

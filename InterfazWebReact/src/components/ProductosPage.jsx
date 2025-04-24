@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Pagination } from 'react-bootstrap';
-import { FaShoppingCart, FaHeart, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import React, { useState, useMemo } from 'react';
+import { Container, Row, Col, Pagination, Form, InputGroup } from 'react-bootstrap';
+import { FaShoppingCart, FaHeart, FaChevronLeft, FaChevronRight, FaSearch } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
 import PopUp from './PopUp';
@@ -13,6 +13,7 @@ const ProductosPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
   const productsPerPage = 6;
 
   const productos = [
@@ -102,10 +103,23 @@ const ProductosPage = () => {
     }
   ];
 
+  // Filtrar productos basado en el término de búsqueda
+  const filteredProducts = useMemo(() => {
+    return productos.filter(producto =>
+      producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = productos.slice(indexOfFirstProduct, indexOfLastProduct);
-  const totalPages = Math.ceil(productos.length / productsPerPage);
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  // Resetear la página cuando cambia el término de búsqueda
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1);
+  };
 
   const handleAddToCart = (producto) => {
     const productoConPrecioNumerico = {
@@ -145,67 +159,91 @@ const ProductosPage = () => {
       <div className="productos-header">
         <h1>Listado de Productos</h1>
         <p>Descubre nuestra exclusiva línea de electrodomésticos JAM</p>
+        <div className="search-container">
+          <InputGroup>
+            <InputGroup.Text>
+              <FaSearch />
+            </InputGroup.Text>
+            <Form.Control
+              type="text"
+              placeholder="Buscar productos..."
+              value={searchTerm}
+              onChange={handleSearch}
+              className="search-input"
+            />
+          </InputGroup>
+        </div>
       </div>
       
       <Container fluid className="productos-container">
-        <Row className="productos-grid justify-content-center">
-          {currentProducts.map((producto) => (
-            <Col key={producto.id} xs={12} sm={6} md={4} lg={4} className="producto-col">
-              <div className="producto-card">
-                <div className="producto-imagen">
-                  <img src={producto.imagen} alt={producto.nombre} />
-                </div>
-                <div className="producto-info">
-                  <h3 className="producto-nombre">{producto.nombre}</h3>
-                  <p className="producto-descripcion">{producto.descripcion}</p>
-                  <p className="producto-precio">{producto.precio.toLocaleString('es-PY')} Gs</p>
-                  <div className="producto-actions">
-                    <button 
-                      className="producto-btn-cart"
-                      onClick={() => handleAddToCart(producto)}
-                    >
-                      <FaShoppingCart /> Comprar
-                    </button>
-                    <button 
-                      className={`producto-btn-favorite ${favorites.includes(producto.id) ? 'active' : ''}`}
-                      onClick={() => handleToggleFavorite(producto.id)}
-                    >
-                      <FaHeart />
-                    </button>
+        {filteredProducts.length === 0 ? (
+          <div className="no-results">
+            <p>No se encontraron productos que coincidan con tu búsqueda.</p>
+          </div>
+        ) : (
+          <>
+            <Row className="productos-grid justify-content-center">
+              {currentProducts.map((producto) => (
+                <Col key={producto.id} xs={12} sm={6} md={4} lg={4} className="producto-col">
+                  <div className="producto-card">
+                    <div className="producto-imagen">
+                      <img src={producto.imagen} alt={producto.nombre} />
+                    </div>
+                    <div className="producto-info">
+                      <h3 className="producto-nombre">{producto.nombre}</h3>
+                      <p className="producto-descripcion">{producto.descripcion}</p>
+                      <p className="producto-precio">{producto.precio.toLocaleString('es-PY')} Gs</p>
+                      <div className="producto-actions">
+                        <button 
+                          className="producto-btn-cart"
+                          onClick={() => handleAddToCart(producto)}
+                        >
+                          <FaShoppingCart /> Comprar
+                        </button>
+                        <button 
+                          className={`producto-btn-favorite ${favorites.includes(producto.id) ? 'active' : ''}`}
+                          onClick={() => handleToggleFavorite(producto.id)}
+                        >
+                          <FaHeart />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </Col>
-          ))}
-        </Row>
+                </Col>
+              ))}
+            </Row>
 
-        <div className="pagination-container">
-          <Pagination className="justify-content-center">
-            <Pagination.Prev 
-              onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              <FaChevronLeft />
-            </Pagination.Prev>
-            
-            {[...Array(totalPages)].map((_, index) => (
-              <Pagination.Item
-                key={index + 1}
-                active={index + 1 === currentPage}
-                onClick={() => handlePageChange(index + 1)}
-              >
-                {index + 1}
-              </Pagination.Item>
-            ))}
-            
-            <Pagination.Next
-              onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              <FaChevronRight />
-            </Pagination.Next>
-          </Pagination>
-        </div>
+            {filteredProducts.length > productsPerPage && (
+              <div className="pagination-container">
+                <Pagination className="justify-content-center">
+                  <Pagination.Prev 
+                    onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                  >
+                    <FaChevronLeft />
+                  </Pagination.Prev>
+                  
+                  {[...Array(totalPages)].map((_, index) => (
+                    <Pagination.Item
+                      key={index + 1}
+                      active={index + 1 === currentPage}
+                      onClick={() => handlePageChange(index + 1)}
+                    >
+                      {index + 1}
+                    </Pagination.Item>
+                  ))}
+                  
+                  <Pagination.Next
+                    onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                  >
+                    <FaChevronRight />
+                  </Pagination.Next>
+                </Pagination>
+              </div>
+            )}
+          </>
+        )}
       </Container>
 
       {showPopup && (

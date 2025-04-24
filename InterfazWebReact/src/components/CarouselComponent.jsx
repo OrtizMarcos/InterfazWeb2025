@@ -136,7 +136,7 @@ const CarouselComponent = () => {
 
   return (
     <section className="carousel-section">
-      <h2 className="carousel-title">Nuestros Productos</h2>
+      <h2 className="carousel-title">Nuevos Productos</h2>
       <Carousel 
         className="multi-item-carousel" 
         interval={8000}

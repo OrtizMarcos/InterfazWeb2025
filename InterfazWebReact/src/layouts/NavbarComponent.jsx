@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
-import { Navbar as BootstrapNavbar, Nav, Form, Button, Container, InputGroup } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaSearch, FaHeart } from 'react-icons/fa';
+import React from 'react';
+import { Navbar as BootstrapNavbar, Nav, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
 import '../styles/Navbar.css';
 
 const NavbarComponent = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useNavigate();
   const { getCartCount } = useCart();
   const { favorites } = useFavorites();
 
-  const handleSearch = (e) => {
+  const handleContactClick = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-    }
+    window.open('mailto:jam.electrodomesticos@gmail.com', '_blank');
   };
 
   return (
@@ -28,22 +24,8 @@ const NavbarComponent = () => {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
             <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
-            <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
+            <Nav.Link onClick={handleContactClick} href="#">Contacto</Nav.Link>
           </Nav>
-          <Form className="d-flex me-3" onSubmit={handleSearch}>
-            <InputGroup>
-              <Form.Control
-                type="search"
-                placeholder="Buscar productos..."
-                className="me-2"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <Button variant="outline-light" type="submit">
-                <FaSearch />
-              </Button>
-            </InputGroup>
-          </Form>
           <Nav>
             <Nav.Link as={Link} to="/favoritos" className="favorites-link me-2">
               <FaHeart />
