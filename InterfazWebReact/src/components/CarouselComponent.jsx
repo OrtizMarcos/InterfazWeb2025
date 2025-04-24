@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Carousel, Card, Button } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import { productImages } from '../assets/productImages';
+import PopUp from './PopUp';
 import '../styles/CarouselComponent.css';
 
 const CarouselComponent = () => {
   const { addToCart } = useCart();
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const productos = [
     {
@@ -106,7 +109,19 @@ const CarouselComponent = () => {
       ...producto,
       precio: Number(producto.precio)
     };
+    setSelectedProduct(productoConPrecioNumerico);
+    setShowPopup(true);
     addToCart(productoConPrecioNumerico);
+  };
+
+  const handleConfirmAdd = () => {
+    setShowPopup(false);
+    setSelectedProduct(null);
+  };
+
+  const handleCancelAdd = () => {
+    setShowPopup(false);
+    setSelectedProduct(null);
   };
 
   return (
@@ -156,6 +171,13 @@ const CarouselComponent = () => {
           </Carousel.Item>
         ))}
       </Carousel>
+      {showPopup && (
+        <PopUp
+          message={`${selectedProduct?.nombre} se ha agregado al carrito con éxito`}
+          onClose={handleConfirmAdd}
+          onCancel={handleCancelAdd}
+        />
+      )}
     </section>
   );
 };

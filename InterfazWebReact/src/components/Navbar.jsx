@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Navbar as BootstrapNavbar, Nav, Form, Button, Container, InputGroup } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaSearch } from 'react-icons/fa';
+import { FaShoppingCart, FaSearch, FaHeart } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { getCartCount } = useCart();
+  const { favorites } = useFavorites();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -16,6 +18,8 @@ const Navbar = () => {
       navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
     }
   };
+
+  const cartItemCount = favorites.length;
 
   return (
     <BootstrapNavbar bg="dark" variant="dark" expand="lg" className="custom-navbar">
@@ -44,9 +48,13 @@ const Navbar = () => {
             </InputGroup>
           </Form>
           <Nav>
+            <Nav.Link as={Link} to="/favoritos" className="cart-link">
+              <FaHeart />
+              {favorites.length > 0 && <span className="cart-count">{favorites.length}</span>}
+            </Nav.Link>
             <Nav.Link as={Link} to="/carrito" className="cart-link">
               <FaShoppingCart />
-              <span className="cart-count">{getCartCount()}</span>
+              {getCartCount() > 0 && <span className="cart-count">{getCartCount()}</span>}
             </Nav.Link>
           </Nav>
         </BootstrapNavbar.Collapse>
