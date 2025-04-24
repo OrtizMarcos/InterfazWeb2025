@@ -1,11 +1,24 @@
-import React from 'react';
-import { Container, Row, Col, Card, Button, Table } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Row, Col, Card, Button, Table, Form, Alert } from 'react-bootstrap';
 import { FaTrash, FaPlus, FaMinus } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import '../styles/CarritoPage.css';
 
 const CarritoPage = () => {
-  const { cartItems, removeFromCart, updateQuantity, getCartTotal, getSubtotal } = useCart();
+  const { 
+    cartItems, 
+    removeFromCart, 
+    updateQuantity, 
+    getCartTotal, 
+    getSubtotal,
+    applyCoupon,
+    removeCoupon,
+    getDiscount,
+    appliedCoupon 
+  } = useCart();
+
+  const [couponCode, setCouponCode] = useState('');
+  const [couponMessage, setCouponMessage] = useState(null);
 
   const handleQuantityChange = (productId, newQuantity) => {
     updateQuantity(productId, newQuantity);
@@ -13,6 +26,23 @@ const CarritoPage = () => {
 
   const formatPrice = (price) => {
     return Number(price).toLocaleString('es-PY');
+  };
+
+  const handleApplyCoupon = () => {
+    const result = applyCoupon(couponCode);
+    setCouponMessage({
+      type: result.isValid ? 'success' : 'danger',
+      text: result.message
+    });
+    if (!result.isValid) {
+      setCouponCode('');
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    removeCoupon();
+    setCouponCode('');
+    setCouponMessage(null);
   };
 
   return (
@@ -88,6 +118,51 @@ const CarritoPage = () => {
                   <span>Subtotal:</span>
                   <span>{formatPrice(getSubtotal())} Gs</span>
                 </div>
+
+                {/* Sección de Cupones */}
+                <div className="coupon-section mb-3">
+                  <Form.Group>
+                    <Form.Label>Cupón de descuento</Form.Label>
+                    <div className="d-flex gap-2">
+                      <Form.Control
+                        type="text"
+                        placeholder="Ingresa tu cupón"
+                        value={couponCode}
+                        onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                        disabled={appliedCoupon !== null}
+                      />
+                      {appliedCoupon ? (
+                        <Button 
+                          variant="outline-danger" 
+                          onClick={handleRemoveCoupon}
+                        >
+                          Quitar
+                        </Button>
+                      ) : (
+                        <Button 
+                          variant="outline-primary" 
+                          onClick={handleApplyCoupon}
+                          disabled={!couponCode}
+                        >
+                          Aplicar
+                        </Button>
+                      )}
+                    </div>
+                  </Form.Group>
+                  {couponMessage && (
+                    <Alert variant={couponMessage.type} className="mt-2 mb-0 py-2">
+                      {couponMessage.text}
+                    </Alert>
+                  )}
+                </div>
+
+                {appliedCoupon && (
+                  <div className="d-flex justify-content-between mb-2 text-success">
+                    <span>Descuento ({appliedCoupon.discountPercentage}%):</span>
+                    <span>-{formatPrice(getDiscount())} Gs</span>
+                  </div>
+                )}
+
                 <div className="d-flex justify-content-between mb-2">
                   <span>Envío:</span>
                   <span>0 Gs</span>
