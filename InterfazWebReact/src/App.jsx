@@ -5,6 +5,8 @@ import NavbarComponent from './layouts/NavbarComponent';
 import CarouselComponent from './components/CarouselComponent';
 import MainComponent from './components/MainComponent';
 import CarritoPage from './pages/CarritoPage';
+import ProductosPage from './components/ProductosPage';
+import EmpresaPage from './components/EmpresaPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/App.css';
 
@@ -37,6 +39,8 @@ function App() {
               </div>
             } />
             <Route path="/carrito" element={<CarritoPage />} />
+            <Route path="/productos" element={<ProductosPage />} />
+            <Route path="/empresa" element={<EmpresaPage />} />
           </Routes>
         </div>
       </CartProvider>
