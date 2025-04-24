@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Carousel, Card, Button } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import { productImages } from '../assets/productImages';
 import PopUp from './PopUp';
@@ -8,6 +9,7 @@ import '../styles/CarouselComponent.css';
 
 const CarouselComponent = () => {
   const { addToCart } = useCart();
+  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
   const [showPopup, setShowPopup] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -124,6 +126,14 @@ const CarouselComponent = () => {
     setSelectedProduct(null);
   };
 
+  const handleToggleFavorite = (productId) => {
+    if (favorites.includes(productId)) {
+      removeFromFavorites(productId);
+    } else {
+      addToFavorites(productId);
+    }
+  };
+
   return (
     <section className="carousel-section">
       <h2 className="carousel-title">Nuestros Productos</h2>
@@ -159,8 +169,12 @@ const CarouselComponent = () => {
                         >
                           <FaShoppingCart /> Comprar
                         </Button>
-                        <Button variant="outline-danger" className="btn-favorito">
-                          <FaHeart /> Favorito
+                        <Button 
+                          variant={favorites.includes(producto.id) ? "danger" : "outline-danger"}
+                          className="btn-favorito"
+                          onClick={() => handleToggleFavorite(producto.id)}
+                        >
+                          <FaHeart />
                         </Button>
                       </div>
                     </Card.Body>

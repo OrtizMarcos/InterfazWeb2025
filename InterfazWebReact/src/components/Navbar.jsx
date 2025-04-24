@@ -19,19 +19,16 @@ const Navbar = () => {
     }
   };
 
-  const cartItemCount = favorites.length;
-
   return (
     <BootstrapNavbar bg="dark" variant="dark" expand="lg" className="custom-navbar">
       <Container>
-        <BootstrapNavbar.Brand as={Link} to="/">Mi Tienda</BootstrapNavbar.Brand>
+        <BootstrapNavbar.Brand as={Link} to="/">JAM</BootstrapNavbar.Brand>
         <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
             <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
-            <Nav.Link as={Link} to="/categorias">Categorías</Nav.Link>
-            <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
+            <Nav.Link as={Link} to="/empresa">Empresa</Nav.Link>
           </Nav>
           <Form className="d-flex me-3" onSubmit={handleSearch}>
             <InputGroup>
