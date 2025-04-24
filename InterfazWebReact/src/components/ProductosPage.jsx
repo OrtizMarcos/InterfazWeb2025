@@ -1,130 +1,138 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Pagination } from 'react-bootstrap';
 import { FaShoppingCart, FaHeart, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
+import PopUp from './PopUp';
 import '../styles/ProductosPage.css';
 import { productImages } from '../assets/productImages';
 
 const ProductosPage = () => {
-  const [favorites, setFavorites] = useState([]);
-  const [_cartItems, setCartItems] = useState([]);
+  const { addToCart } = useCart();
+  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
   const [currentPage, setCurrentPage] = useState(1);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const productsPerPage = 6;
 
   const productos = [
     {
       id: 1,
       nombre: "Heladera JAM 500L",
-      precio: "4.500.000 Gs",
+      precio: 4500000,
       imagen: productImages.heladera,
       descripcion: "Heladera No Frost con tecnología de enfriamiento inteligente"
     },
     {
       id: 2,
       nombre: "Lavadora JAM Smart 8kg",
-      precio: "2.800.000 Gs",
+      precio: 2800000,
       imagen: productImages.lavadora,
       descripcion: "Lavadora de carga frontal con programas inteligentes"
     },
     {
       id: 3,
       nombre: "Microondas JAM Digital 25L",
-      precio: "1.200.000 Gs",
+      precio: 1200000,
       imagen: productImages.microondas,
       descripcion: "Microondas digital con múltiples funciones"
     },
     {
       id: 4,
       nombre: "Aire Acondicionado JAM Split 12000 BTU",
-      precio: "2.900.000 Gs",
+      precio: 2900000,
       imagen: productImages.aire,
       descripcion: "Aire acondicionado split con tecnología inverter"
     },
     {
       id: 5,
       nombre: "Cocina JAM 4 Hornallas",
-      precio: "1.800.000 Gs",
+      precio: 1800000,
       imagen: productImages.cocina,
       descripcion: "Cocina moderna con 4 hornallas y horno eléctrico"
     },
     {
       id: 6,
       nombre: "Lavavajillas JAM 12 Cubiertos",
-      precio: "2.300.000 Gs",
+      precio: 2300000,
       imagen: productImages.lavavajillas,
       descripcion: "Lavavajillas con capacidad para 12 cubiertos y programas especiales"
     },
     {
       id: 7,
       nombre: "Horno Eléctrico JAM 60L",
-      precio: "1.500.000 Gs",
+      precio: 1500000,
       imagen: productImages.horno,
       descripcion: "Horno eléctrico con convección y múltiples funciones"
     },
     {
       id: 8,
       nombre: "Secadora JAM 8kg",
-      precio: "2.100.000 Gs",
+      precio: 2100000,
       imagen: productImages.secadora,
       descripcion: "Secadora de ropa con sensor de humedad y múltiples programas"
     },
     {
       id: 9,
       nombre: "Freezer JAM 200L",
-      precio: "2.700.000 Gs",
+      precio: 2700000,
       imagen: productImages.freezer,
       descripcion: "Freezer vertical con sistema No Frost y control digital"
     },
     {
       id: 10,
       nombre: "Purificador de Aire JAM Smart",
-      precio: "1.200.000 Gs",
+      precio: 1200000,
       imagen: productImages.purificador,
       descripcion: "Purificador de aire con filtro HEPA y control inteligente"
     },
     {
       id: 11,
       nombre: "Ventilador JAM Tower",
-      precio: "800.000 Gs",
+      precio: 800000,
       imagen: productImages.ventilador,
       descripcion: "Ventilador de torre con control remoto y temporizador"
     },
     {
       id: 12,
       nombre: "Aspiradora JAM Robot",
-      precio: "2500.000 Gs",
+      precio: 2500000,
       imagen: productImages.aspiradora,
       descripcion: "Aspiradora robot con mapeo inteligente y control por app"
     }
   ];
 
-  // Calcular productos para la página actual
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = productos.slice(indexOfFirstProduct, indexOfLastProduct);
   const totalPages = Math.ceil(productos.length / productsPerPage);
 
-  const handleAddToCart = (product) => {
-    const existingItem = _cartItems.find(item => item.id === product.id);
-    if (existingItem) {
-      setCartItems(prevItems => prevItems.map(item =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      ));
-    } else {
-      setCartItems(prevItems => [...prevItems, { ...product, quantity: 1 }]);
-    }
+  const handleAddToCart = (producto) => {
+    const productoConPrecioNumerico = {
+      ...producto,
+      precio: Number(producto.precio)
+    };
+    setSelectedProduct(productoConPrecioNumerico);
+    setShowPopup(true);
+    addToCart(productoConPrecioNumerico);
   };
 
   const handleToggleFavorite = (productId) => {
-    setFavorites(prev => {
-      if (prev.includes(productId)) {
-        return prev.filter(id => id !== productId);
-      } else {
-        return [...prev, productId];
-      }
-    });
+    if (favorites.includes(productId)) {
+      removeFromFavorites(productId);
+    } else {
+      addToFavorites(productId);
+    }
+  };
+
+  const handleConfirmAdd = () => {
+    setShowPopup(false);
+    setSelectedProduct(null);
+  };
+
+  const handleCancelAdd = () => {
+    setShowPopup(false);
+    setSelectedProduct(null);
   };
 
   const handlePageChange = (pageNumber) => {
@@ -150,7 +158,7 @@ const ProductosPage = () => {
                 <div className="producto-info">
                   <h3 className="producto-nombre">{producto.nombre}</h3>
                   <p className="producto-descripcion">{producto.descripcion}</p>
-                  <p className="producto-precio">{producto.precio}</p>
+                  <p className="producto-precio">{producto.precio.toLocaleString('es-PY')} Gs</p>
                   <div className="producto-actions">
                     <button 
                       className="producto-btn-cart"
@@ -159,7 +167,7 @@ const ProductosPage = () => {
                       <FaShoppingCart /> Comprar
                     </button>
                     <button 
-                      className={`producto-btn-favorite ${favorites.some(item => item === producto.id) ? 'active' : ''}`}
+                      className={`producto-btn-favorite ${favorites.includes(producto.id) ? 'active' : ''}`}
                       onClick={() => handleToggleFavorite(producto.id)}
                     >
                       <FaHeart />
@@ -171,7 +179,6 @@ const ProductosPage = () => {
           ))}
         </Row>
 
-        {/* Paginación */}
         <div className="pagination-container">
           <Pagination className="justify-content-center">
             <Pagination.Prev 
@@ -200,6 +207,14 @@ const ProductosPage = () => {
           </Pagination>
         </div>
       </Container>
+
+      {showPopup && (
+        <PopUp
+          message={`${selectedProduct?.nombre} se ha agregado al carrito con éxito`}
+          onClose={handleConfirmAdd}
+          onCancel={handleCancelAdd}
+        />
+      )}
     </div>
   );
 };
